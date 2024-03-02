@@ -1,6 +1,7 @@
 package br.com.api.clientes.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.service.annotation.DeleteExchange;
 
 import br.com.api.clientes.model.ClientesModel;
 import br.com.api.clientes.repository.ClientesRepository;
@@ -10,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 // import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +41,16 @@ public class ClientesController {
     @SuppressWarnings("null")
     ClientesModel novoCliente = clientesRepository.save(clientesModel);
     return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
-
   }
 
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deletarClient(@PathVariable Long id) {
+    @SuppressWarnings("null")
+    ClientesModel clientesEncontrado = clientesRepository.findById(id).get();
+    if (clientesEncontrado == null) {
+      return ResponseEntity.badRequest().build();
+    }
+    clientesRepository.delete(clientesEncontrado);
+    return ResponseEntity.noContent().build();
+  }
 }

@@ -23,5 +23,5 @@ public class ClientesModel {
   private String nome;
   @NonNull
   private String cpf;
-
+  
 }
