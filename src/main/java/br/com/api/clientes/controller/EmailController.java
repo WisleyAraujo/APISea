@@ -1,4 +1,5 @@
 package br.com.api.clientes.controller;
+
 import org.springframework.web.bind.annotation.RestController;
 import br.com.api.clientes.model.EmailModel;
 import br.com.api.clientes.repository.EmailRepository;
@@ -15,19 +16,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/email")
 public class EmailController {
   @Autowired
-  EmailRepository emailRepository;
+  private EmailRepository emailRepository;
 
-  @GetMapping()
+  @GetMapping("/listar")
   public List<EmailModel> listarEmail() {
     return emailRepository.findAll();
   }
 
-  @PostMapping()
-  public ResponseEntity<EmailModel> cadastrarEmail(@RequestBody EmailModel
-  emailModel) {
-  @SuppressWarnings("null")
-  EmailModel novoEmail = emailRepository.save(emailModel);
-  return ResponseEntity.status(HttpStatus.CREATED).body(novoEmail);
+  @PostMapping("/cadastrar")
+  public ResponseEntity<EmailModel> cadastrarEmail(@RequestBody EmailModel emailModel) {
+    @SuppressWarnings("null")
+    EmailModel novoEmail = emailRepository.save(emailModel);
+    return ResponseEntity.status(HttpStatus.CREATED).body(novoEmail);
   }
 
 }

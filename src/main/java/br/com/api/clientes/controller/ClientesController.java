@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.api.clientes.model.ClientesModel;
 import br.com.api.clientes.repository.ClientesRepository;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +22,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/clientes")
 public class ClientesController {
   @Autowired
-  ClientesRepository clientesRepository;
+  private ClientesRepository clientesRepository;
 
-  @GetMapping()
+  @GetMapping("/listar")
   public List<ClientesModel> listarClientes() {
     return clientesRepository.findAll();
   }
 
   @SuppressWarnings("null")
-  @GetMapping("/{id}")
+  @GetMapping("listar/{id}")
   public ClientesModel listarClientesId(@PathVariable Long id) {
     return clientesRepository.findById(id).get();
   }
 
-  @PostMapping()
+  @PostMapping("/cadastrar")
   public ResponseEntity<ClientesModel> cadastrarCliente(@RequestBody ClientesModel clientesModel) {
     @SuppressWarnings("null")
     ClientesModel novoCliente = clientesRepository.save(clientesModel);
     return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("deletar/{id}")
   public ResponseEntity<Void> deletarClient(@PathVariable Long id) {
     @SuppressWarnings("null")
     ClientesModel clientesEncontrado = clientesRepository.findById(id).get();

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.api.clientes.model.ClientesModel;
 
-public interface ClientesRepository extends JpaRepository<ClientesModel, Long> {
-}
 
+public interface ClientesRepository extends JpaRepository<ClientesModel, Long> {
+
+}

@@ -1,6 +1,5 @@
 package br.com.api.clientes.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.micrometer.common.lang.NonNull;
@@ -31,14 +30,16 @@ public class ClientesModel {
   @NonNull
   private String cpf;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "endereco_id", referencedColumnName = "id")
   private EnderecoModel endereco;
 
-  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<EmailModel> emails = new ArrayList<>();
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "telefone_id")
+  private List<TelefoneModel> telefones;
 
-  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<TelefoneModel> telefones =  new ArrayList<>();
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "email_id")
+  private List<EmailModel> emails;
 
 }

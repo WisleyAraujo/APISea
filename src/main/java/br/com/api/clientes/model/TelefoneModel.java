@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,12 +16,8 @@ public class TelefoneModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String numero_telefone;
+
   private String ddd;
-  private TipoTelefone tipo_telefone;
-
-  @ManyToOne
-  @JoinColumn(name = "cliente_id", referencedColumnName = "id")
-  private ClientesModel cliente;
-
+  private String telefone_numero;
+  private String telefone_tipo;
 }
