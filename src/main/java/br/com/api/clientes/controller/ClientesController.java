@@ -1,10 +1,10 @@
 package br.com.api.clientes.controller;
 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.service.annotation.DeleteExchange;
 
 import br.com.api.clientes.model.ClientesModel;
 import br.com.api.clientes.repository.ClientesRepository;
+
 
 import java.util.List;
 
