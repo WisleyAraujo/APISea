@@ -1,5 +1,6 @@
 package br.com.api.clientes.model;
 
+import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,9 +16,12 @@ import lombok.Setter;
 public class ClientesModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long codigo;
-  private String nome;
-  private String cpf;
+  @NonNull
+  private Long id;
 
+  @NonNull
+  private String nome;
+  @NonNull
+  private String cpf;
 
 }
