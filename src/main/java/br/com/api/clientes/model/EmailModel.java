@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="email")
+@Table(name = "email")
 @Getter
 @Setter
 public class EmailModel {
@@ -17,5 +17,6 @@ public class EmailModel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String email;
+
 
 }
