@@ -4,12 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table (name = "telefones")
+@Table(name = "telefones")
 @Getter
 @Setter
 public class TelefoneModel {
@@ -17,5 +19,11 @@ public class TelefoneModel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String numero_telefone;
-  private  TipoTelefone tipo_telefone;
+  private String ddd;
+  private TipoTelefone tipo_telefone;
+
+  @ManyToOne
+  @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+  private ClientesModel cliente;
+
 }

@@ -24,3 +24,4 @@ public class EmailModel {
   @JoinColumn(name = "cliente_id", referencedColumnName = "id")
   private ClientesModel cliente;
 }
+

@@ -38,4 +38,7 @@ public class ClientesModel {
   @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<EmailModel> emails = new ArrayList<>();
 
+  @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<TelefoneModel> telefones =  new ArrayList<>();
+
 }
