@@ -31,8 +31,15 @@ public class UsuarioModel implements UserDetails {
   private Long id;
   private String login;
   private String senha;
-  private String role;
+  private UserRole role;
 
+  public UsuarioModel(String login, String senha, UserRole userRole) {
+    this.login = login;
+    this.senha = senha;
+    this.role = userRole;
+  }
+
+  @SuppressWarnings("unlikely-arg-type")
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     if (this.role.equals(UserRole.ADMIN.toString())) {
