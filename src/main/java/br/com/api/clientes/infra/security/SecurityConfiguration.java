@@ -21,10 +21,10 @@ public class SecurityConfiguration {
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers(HttpMethod.POST, "/login").permitAll()
-            .requestMatchers(HttpMethod.POST, "/registar").permitAll()
             .requestMatchers(HttpMethod.GET).permitAll()
-            .requestMatchers(HttpMethod.POST, "/clientes/cadastrar").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.POST, "/auth/registar").permitAll()
+            .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/clientes/cadastrar").permitAll()
             .anyRequest().authenticated())
         .build();
   }

@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class UsuarioModel implements UserDetails {
   private Long id;
   private String login;
   private String senha;
+  @Transient
   private UserRole role;
 
   public UsuarioModel(String login, String senha, UserRole userRole) {
