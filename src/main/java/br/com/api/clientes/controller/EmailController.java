@@ -25,7 +25,6 @@ public class EmailController {
 
   @PostMapping("/cadastrar")
   public ResponseEntity<EmailModel> cadastrarEmail(@RequestBody EmailModel emailModel) {
-    @SuppressWarnings("null")
     EmailModel novoEmail = emailRepository.save(emailModel);
     return ResponseEntity.status(HttpStatus.CREATED).body(novoEmail);
   }

@@ -18,6 +18,6 @@ public class TelefoneModel {
   private Long id;
 
   private String ddd;
-  private String telefone_numero;
+  private String numero;
   private String telefone_tipo;
 }

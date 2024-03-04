@@ -27,7 +27,6 @@ public class TelefoneController {
 
   @PostMapping("/cadastro")
   public ResponseEntity<TelefoneModel> casdastrarTelefone(@RequestBody TelefoneModel telefoneModel) {
-    @SuppressWarnings("null")
     TelefoneModel novoTelefone = telefoneRepository.save(telefoneModel);
     return ResponseEntity.status(HttpStatus.CREATED).body(novoTelefone);
   }
