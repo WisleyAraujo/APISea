@@ -13,11 +13,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("auth")
+@CrossOrigin(origins = "*")
 public class AuthController {
   @Autowired
   AuthenticationManager authenticationManager;
@@ -29,11 +31,12 @@ public class AuthController {
   UsuarioRepository repository;
 
   @PostMapping("/login")
+  @CrossOrigin(origins = "*", allowedHeaders = "*")
   public ResponseEntity<?> login(@RequestBody AuthenticationDTO data) {
     var userNamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.senha());
     var auth = this.authenticationManager.authenticate(userNamePassword);
 
-    var token = tokenService.generateToken((UsuarioModel)auth.getPrincipal());
+    var token = tokenService.generateToken((UsuarioModel) auth.getPrincipal());
 
     return ResponseEntity.ok(new LoginRespondeDTO(token));
   }

@@ -19,5 +19,5 @@ public class TelefoneModel {
 
   private String ddd;
   private String numero;
-  private String telefone_tipo;
+  private String tipo;
 }
