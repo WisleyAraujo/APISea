@@ -3,6 +3,7 @@ package br.com.api.clientes.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.api.clientes.infra.security.TokenService;
 import br.com.api.clientes.model.UsuarioModel;
 import br.com.api.clientes.repository.UsuarioRepository;
 
@@ -22,14 +23,19 @@ public class AuthController {
   AuthenticationManager authenticationManager;
 
   @Autowired
+  TokenService tokenService;
+
+  @Autowired
   UsuarioRepository repository;
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody AuthenticationDTO data) {
     var userNamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.senha());
-    @SuppressWarnings("unused")
     var auth = this.authenticationManager.authenticate(userNamePassword);
-    return ResponseEntity.ok().build();
+
+    var token = tokenService.generateToken((UsuarioModel)auth.getPrincipal());
+
+    return ResponseEntity.ok(new LoginRespondeDTO(token));
   }
 
   @PostMapping("/register")
