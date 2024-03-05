@@ -8,11 +8,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+// import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,7 +34,7 @@ public class UsuarioModel implements UserDetails {
   private Long id;
   private String login;
   private String senha;
-  @Transient
+  @Enumerated(EnumType.STRING)
   private UserRole role;
 
   public UsuarioModel(String login, String senha, UserRole userRole) {
@@ -41,10 +43,9 @@ public class UsuarioModel implements UserDetails {
     this.role = userRole;
   }
 
-  @SuppressWarnings("unlikely-arg-type")
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    if (this.role.equals(UserRole.ADMIN.toString())) {
+    if (this.role.equals(UserRole.ADMIN)) {
       return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
     } else {
       return List.of(new SimpleGrantedAuthority("ROLE_USER"));
